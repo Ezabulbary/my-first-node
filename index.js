@@ -12,18 +12,24 @@ app.get('/', (req, res) => {
 });
 
 const users = [
-    { id: 1, name: 'abdul alim', job: 'khai shudhu halim' },
-    { id: 2, name: 'abdul halim', job: 'khai shudhu halim' },
-    { id: 3, name: 'abdul jobbar', job: 'khai shudhu halim' },
-    { id: 4, name: 'abdul kuddus', job: 'khai shudhu halim' },
-    { id: 5, name: 'abdul baten', job: 'khai shudhu halim' },
-    { id: 6, name: 'abdul hasan', job: 'khai shudhu halim' },
-    { id: 7, name: 'abdul mofiz', job: 'khai shudhu halim' }
+    { id: 1, name: 'abdul alim', email: 'alim@gmail.com' },
+    { id: 2, name: 'abdul halim', email: 'halim@gmail.com' },
+    { id: 3, name: 'abdul jobbar', email: 'jobbar@gmail.com' },
+    { id: 4, name: 'abdul kuddus', email: 'kuddus@gmail.com' },
+    { id: 5, name: 'abdul baten', email: 'baten@gmail.com' },
+    { id: 6, name: 'abdul hasan', email: 'hasan@gmail.com' },
+    { id: 7, name: 'abdul mofiz', email: 'mofiz@gmail.com' }
 ];
 
 app.get('/users', (req, res) => {
-    console.log(req.query)
-    res.send(users)
+    if(req.query.name){
+        const search = req.query.name.toLowerCase();
+        const matched = users.filter(user => user.name.toLowerCase().includes(search))
+        res.send(matched);
+    }
+    else{
+        res.send(users)
+    }
 });
 
 app.get('/user/:id', (req, res) => {
